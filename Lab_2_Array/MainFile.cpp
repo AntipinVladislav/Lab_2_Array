@@ -22,7 +22,7 @@ class LinkedList {
 private:
 	Node* head;
 
-	
+
 	void copy(const LinkedList& list) {
 		head = new Node;
 		head->motivation = list.head->motivation;
@@ -64,7 +64,7 @@ public:
 		}
 	}
 
-	~LinkedList(){
+	~LinkedList() {
 		Node* old_head = head;
 		if (head == nullptr)
 			return;
@@ -84,17 +84,17 @@ public:
 		}
 
 		Node* current = head;
-			
+
 		while (current->next != head) {
 			current = current->next;
 		}
-		
+
 		current->next = node;
 		node->next = head;
 	}
 
 	void push_tail(LinkedList& list) {
-		
+
 		if (head == nullptr) {
 			copy(list);
 		}
@@ -187,6 +187,33 @@ public:
 
 	}
 
+	Node*& operator[](const size_t index) {
+		Node* current = head;
+		int count = 0;
+
+
+		while (count != index) {
+			current = current->next;
+			count++;
+		}
+
+		return current;
+	}
+
+	const Node* operator[](const size_t index) const{
+		Node* current = head;
+		int count = 0;
+
+
+		while (count != index) {
+			current = current->next;
+			count++;
+		}
+
+		return current;
+	}
+
+
 };
 
 std::ostream& operator<<(std::ostream& out, LinkedList& list) {
@@ -202,6 +229,13 @@ std::ostream& operator<<(std::ostream& out, LinkedList& list) {
 		cur = cur->next;
 		out << cur->motivation << ' ' << cur->power << endl;
 	}
+	return out;
+}
+
+std::ostream& operator<<(std::ostream& out, Node* node) {
+
+	out << node->motivation << ' ' << node->power << endl;
+
 	return out;
 }
 
@@ -247,4 +281,11 @@ int main() {
 
 	list1.delete_node(node1);
 	cout << list1 << endl;
+
+
+	Node* node6 = new Node(0, 0);
+	cout << list2[2] << endl;
+	list2[2]->motivation = 0;
+	list2[2]->power = 0;
+	cout << list2 << endl;
 }
