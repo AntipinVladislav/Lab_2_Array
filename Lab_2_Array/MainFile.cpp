@@ -111,6 +111,35 @@ public:
 		}
 	}
 
+
+
+	void push_head(Node* node) {
+		push_tail(node);
+		head = node;
+	}
+
+	void push_head(LinkedList& list) {
+
+		if (head == nullptr) {
+			copy(list);
+		}
+
+		Node* current = list.get_head();
+
+		Node* nodeh = new Node(current->motivation, current->power);
+		push_tail(nodeh);
+		current = current->next;
+
+		while (current != list.get_head()) {
+			Node* node = new Node(current->motivation, current->power);
+			push_tail(node);
+			current = current->next;
+		}
+
+		head = nodeh;
+	}
+
+
 	Node* get_head() { // ;)
 		return head;
 	}
@@ -153,4 +182,10 @@ int main() {
 	list1.push_tail(list3);
 	cout << list1 << endl;
 
+	Node* node3 = new Node(33, 36);
+	list2.push_head(node3);
+	cout << list2 << endl;
+
+	list2.push_head(list1);
+	cout << list2 << endl;
 }
