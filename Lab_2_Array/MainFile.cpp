@@ -12,7 +12,8 @@ struct Node {
 	float power;
 	Node* next = nullptr;
 	Node() : motivation(0), power(0), next(nullptr) {};
-	Node(float new_coefficient, float new_power) : motivation(new_coefficient), power(new_power) {};
+	Node(float new_motivation, float new_power) : motivation(new_motivation), power(new_power) {};
+
 };
 
 
@@ -168,6 +169,24 @@ public:
 	}
 
 
+	void delete_node(Node* node) {
+		Node* ded_node = new Node(node->motivation, node->power);
+		Node* current = head;
+
+		while (current->next != head) {
+			if (current->next->motivation == ded_node->motivation && current->next->power == ded_node->power) {
+				Node* repair_node = current->next->next;
+				delete current->next;
+				current->next = repair_node;
+			}
+			else
+				current = current->next;
+		}
+		if (head->motivation == ded_node->motivation && head->power == ded_node->power)
+			pop_head();
+
+	}
+
 };
 
 std::ostream& operator<<(std::ostream& out, LinkedList& list) {
@@ -192,9 +211,16 @@ int main() {
 
 	Node* node1 = new Node(2, 4);
 	Node* node2 = new Node(3, 6);
+	Node* node3 = new Node(3, 6);
+	Node* node4 = new Node(2, 4);
+	Node* node5 = new Node(2, 4);
 
 	list1.push_tail(node1);
 	list1.push_tail(node2);
+	list1.push_tail(node3);
+	list1.push_tail(node4);
+	list1.push_tail(node5);
+
 	cout << list1 << endl;
 
 	LinkedList list2(5, 1, 20);
@@ -213,10 +239,12 @@ int main() {
 	list2.push_head(list1);
 	cout << list2 << endl;*/
 
-	list2.pop_head();
+	/*list2.pop_head();
 	cout << list2 << endl;
 
 	list2.pop_tail();
-	cout << list2 << endl;
+	cout << list2 << endl;*/
 
+	list1.delete_node(node1);
+	cout << list1 << endl;
 }
