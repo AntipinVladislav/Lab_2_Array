@@ -20,14 +20,13 @@ struct Node {
 class LinkedList {
 private:
 	Node* head;
-public:
-	LinkedList() : head(head) {};
 
-	LinkedList(const LinkedList& list) {
+	
+	void copy(const LinkedList& list) {
 		head = new Node;
 		head->motivation = list.head->motivation;
 		head->power = list.head->power;
-		
+
 		Node* current_source = list.head->next;
 		Node* current_this = head;
 		while (current_source != list.head)
@@ -43,6 +42,16 @@ public:
 		}
 
 		current_this->next = head;
+	}
+
+public:
+	LinkedList() : head(head) {};
+
+
+
+
+	LinkedList(const LinkedList& list) {
+		copy(list);
 	}
 
 	LinkedList(int size, float low, float high) {
@@ -83,6 +92,25 @@ public:
 		node->next = head;
 	}
 
+	void push_tail(LinkedList& list) {
+		
+		if (head == nullptr) {
+			copy(list);
+		}
+
+		Node* current = list.get_head();
+
+		Node* nodeh = new Node(current->motivation, current->power);
+		push_tail(nodeh);
+		current = current->next;
+
+		while (current != list.get_head()) {
+			Node* node = new Node(current->motivation, current->power);
+			push_tail(node);
+			current = current->next;
+		}
+	}
+
 	Node* get_head() { // ;)
 		return head;
 	}
@@ -121,5 +149,8 @@ int main() {
 
 	LinkedList list3(list2);
 	cout << list3 << endl;
+
+	list1.push_tail(list3);
+	cout << list1 << endl;
 
 }
