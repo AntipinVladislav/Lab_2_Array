@@ -144,6 +144,30 @@ public:
 		return head;
 	}
 
+	void pop_head() {
+		Node* current = head;
+
+		while (current->next != head) {
+			current = current->next;
+		}
+		Node* ded_head = head;
+		current->next = head->next;
+		head = head->next;
+		delete ded_head;
+	}
+
+	void pop_tail() {
+		Node* current = head;
+
+		while (current->next->next != head) {
+			current = current->next;
+		}
+		delete current->next;
+		current->next = head;
+
+	}
+
+
 };
 
 std::ostream& operator<<(std::ostream& out, LinkedList& list) {
@@ -176,7 +200,7 @@ int main() {
 	LinkedList list2(5, 1, 20);
 	cout << list2 << endl;
 
-	LinkedList list3(list2);
+	/*LinkedList list3(list2);
 	cout << list3 << endl;
 
 	list1.push_tail(list3);
@@ -187,5 +211,12 @@ int main() {
 	cout << list2 << endl;
 
 	list2.push_head(list1);
+	cout << list2 << endl;*/
+
+	list2.pop_head();
 	cout << list2 << endl;
+
+	list2.pop_tail();
+	cout << list2 << endl;
+
 }
