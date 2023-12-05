@@ -1,6 +1,11 @@
 #include <iostream>
+#include <cmath>
+#include <stdexcept>
+#include <random>
 
 using namespace std;
+
+std::random_device random_device_new{};
 
 struct Node {
 	float motivation;
@@ -40,6 +45,15 @@ public:
 		current_this->next = head;
 	}
 
+	LinkedList(int size, float low, float high) {
+		std::mt19937 random_engine(random_device_new());
+		std::uniform_real_distribution<> dist(low, high);
+		for (int i = 0; i < size; i++) {
+			Node* node = new Node(dist(random_engine), dist(random_engine));
+			push_tail(node);
+		}
+	}
+
 	~LinkedList(){
 		Node* old_head = head;
 		if (head == nullptr)
@@ -75,7 +89,7 @@ public:
 
 };
 
-std::ostream& operator<<(std::ostream& out, LinkedList list) {
+std::ostream& operator<<(std::ostream& out, LinkedList& list) {
 	Node* my_head = list.get_head();
 
 	if (my_head == nullptr)
@@ -94,8 +108,6 @@ std::ostream& operator<<(std::ostream& out, LinkedList list) {
 
 int main() {
 	LinkedList list1;
-	LinkedList list2;
-
 
 	Node* node1 = new Node(2, 4);
 	Node* node2 = new Node(3, 6);
@@ -103,5 +115,11 @@ int main() {
 	list1.push_tail(node1);
 	list1.push_tail(node2);
 	cout << list1 << endl;
+
+	LinkedList list2(5, 1, 20);
+	cout << list2 << endl;
+
+	LinkedList list3(list2);
+	cout << list3 << endl;
 
 }
