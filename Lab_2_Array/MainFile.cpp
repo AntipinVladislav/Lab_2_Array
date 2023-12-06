@@ -240,6 +240,21 @@ std::ostream& operator<<(std::ostream& out, Node* node) {
 }
 
 
+
+float problem_solver_9000(LinkedList list, float x) {
+	float result = 0;
+	Node* current = list.get_head();
+	Node* head = list.get_head();
+
+	while (current->next != head) {
+		result += pow(current->motivation * x, current->power);
+		current = current->next;
+	}
+	result += pow(current->motivation * x, current->power);
+	return result;
+}
+
+
 int main() {
 	LinkedList list1;
 
@@ -257,35 +272,63 @@ int main() {
 
 	cout << list1 << endl;
 
+	//Рандом
 	LinkedList list2(5, 1, 20);
 	cout << list2 << endl;
 
-	/*LinkedList list3(list2);
+	//Копибарование
+	LinkedList list3(list2);
 	cout << list3 << endl;
 
+	//Лист в конец
 	list1.push_tail(list3);
 	cout << list1 << endl;
 
-	Node* node3 = new Node(33, 36);
+	//Лист и нод в нычало
+	Node* node33 = new Node(33, 36);
 	list2.push_head(node3);
 	cout << list2 << endl;
 
 	list2.push_head(list1);
-	cout << list2 << endl;*/
-
-	/*list2.pop_head();
 	cout << list2 << endl;
 
-	list2.pop_tail();
-	cout << list2 << endl;*/
+	//Франция
+	list2.pop_head();
+	cout << list2 << endl;
 
+	//Ящурица
+	list2.pop_tail();
+	cout << list2 << endl;
+
+	//Удаление ненужного нода
 	list1.delete_node(node1);
 	cout << list1 << endl;
 
-
+	//Скобочки
 	Node* node6 = new Node(0, 0);
 	cout << list2[2] << endl;
 	list2[2]->motivation = 0;
 	list2[2]->power = 0;
 	cout << list2 << endl;
+
+	//СЛОЖНОЕ ЗАДАНИЕ
+	Node* polynomial1 = new Node(2, 5);
+	Node* polynomial2 = new Node(1, 4);
+	Node* polynomial3 = new Node(5, 2);
+	Node* polynomial4 = new Node(1, 1);
+
+	LinkedList result_list;
+	result_list.push_tail(polynomial1);
+	result_list.push_tail(polynomial2);
+	result_list.push_tail(polynomial3);
+	result_list.push_tail(polynomial4);
+
+	cout << result_list << endl;
+
+	float x = 0;
+	cout << "x = ";
+	cin >> x;
+
+	
+	cout << "ANSWER --->>" << problem_solver_9000(result_list, x) << endl;
 }
