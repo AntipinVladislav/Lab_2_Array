@@ -260,9 +260,9 @@ int main() {
 
 	Node* node1 = new Node(2, 4);
 	Node* node2 = new Node(3, 6);
-	Node* node3 = new Node(3, 6);
-	Node* node4 = new Node(2, 4);
-	Node* node5 = new Node(2, 4);
+	Node* node3 = new Node(7, 10);
+	Node* node4 = new Node(3, 6);
+	Node* node5 = new Node(11, 8);
 
 	list1.push_tail(node1);
 	list1.push_tail(node2);
@@ -271,45 +271,54 @@ int main() {
 	list1.push_tail(node5);
 
 	cout << list1 << endl;
+	cout << "JUST LIST" << endl << endl << endl;
 
 	//Рандом
 	LinkedList list2(5, 1, 20);
 	cout << list2 << endl;
+	cout << "RANDOM" << endl << endl << endl;
 
 	//Копибарование
 	LinkedList list3(list2);
 	cout << list3 << endl;
+	cout << "COPY" << endl << endl << endl;
 
 	//Лист в конец
 	list1.push_tail(list3);
 	cout << list1 << endl;
+	cout << "PUSH LIST" << endl << endl << endl;
 
 	//Лист и нод в нычало
-	Node* node33 = new Node(33, 36);
-	list2.push_head(node3);
-	cout << list2 << endl;
+	Node* node6 = new Node(33, 36);
+	list1.push_head(node6);
+	cout << list1 << endl;
+	cout << "PUSH HEAD NODE" << endl << endl << endl;
 
-	list2.push_head(list1);
-	cout << list2 << endl;
+	list1.push_head(list2);
+	cout << list1 << endl;
+	cout << "PUSH HEAD LIST" << endl << endl << endl;
 
 	//Франция
-	list2.pop_head();
-	cout << list2 << endl;
+	list1.pop_head();
+	cout << list1 << endl;
+	cout << "GUILLOTINE" << endl << endl << endl;
 
 	//Ящурица
-	list2.pop_tail();
-	cout << list2 << endl;
+	list1.pop_tail();
+	cout << list1 << endl;
+	cout << "NO TAIL" << endl << endl << endl;
 
 	//Удаление ненужного нода
-	list1.delete_node(node1);
+	list1.delete_node(node2);
 	cout << list1 << endl;
+	cout << "NO NODES?" << endl << endl << endl;
 
 	//Скобочки
-	Node* node6 = new Node(0, 0);
 	cout << list2[2] << endl;
 	list2[2]->motivation = 0;
 	list2[2]->power = 0;
 	cout << list2 << endl;
+	cout << "\[0_0]/" << endl << endl << endl;
 
 	//СЛОЖНОЕ ЗАДАНИЕ
 	Node* polynomial1 = new Node(2, 5);
