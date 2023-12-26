@@ -78,6 +78,10 @@ public:
 	}
 
 	void push_tail(Node* node) {
+		if (node->motivation == 0) {
+			return;
+		}
+
 		if (head == nullptr) {
 			head = node;
 			head->next = head;
@@ -94,6 +98,7 @@ public:
 	}
 
 	void push_tail(LinkedList& list) {
+		
 
 		if (head == nullptr) {
 			copy(list);
@@ -247,10 +252,10 @@ float problem_solver_9000(LinkedList list, float x) {
 	Node* head = list.get_head();
 
 	while (current->next != head) {
-		result += pow(current->motivation * x, current->power);
+		result += current->motivation * pow(x, current->power);
 		current = current->next;
 	}
-	result += pow(current->motivation * x, current->power);
+	result += current->motivation * pow(x, current->power);
 	return result;
 }
 
@@ -289,8 +294,8 @@ int main() {
 	cout << "PUSH LIST" << endl << endl << endl;
 
 	//Лист и нод в нычало
-	Node* node6 = new Node(33, 36);
-	list1.push_head(node6);
+	Node* node88 = new Node(33, 36);
+	list1.push_head(node88);
 	cout << list1 << endl;
 	cout << "PUSH HEAD NODE" << endl << endl << endl;
 
@@ -309,6 +314,10 @@ int main() {
 	cout << "NO TAIL" << endl << endl << endl;
 
 	//Удаление ненужного нода
+	Node* node222 = new Node(3, 6);
+	Node* node22 = new Node(3, 6);
+	list1.push_head(node22);
+	list1.push_tail(node222);
 	list1.delete_node(node2);
 	cout << list1 << endl;
 	cout << "NO NODES?" << endl << endl << endl;
@@ -325,13 +334,14 @@ int main() {
 	Node* polynomial2 = new Node(1, 4);
 	Node* polynomial3 = new Node(5, 2);
 	Node* polynomial4 = new Node(1, 1);
+	Node* polynomial5 = new Node(0, 1);
 
 	LinkedList result_list;
 	result_list.push_tail(polynomial1);
 	result_list.push_tail(polynomial2);
 	result_list.push_tail(polynomial3);
 	result_list.push_tail(polynomial4);
-
+	result_list.push_tail(polynomial5);
 	cout << result_list << endl;
 
 	float x = 0;
